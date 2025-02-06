@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizuy - Crea tu hogar acogedor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Rizuy Store</a></h1>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html">Catálogo</a>
+            <a href="#newsletter">Noticias</a>
+        </nav>
+    </header>
+    <div class="carousel">
+        <div class="carousel-inner">
+            <img src="imagenes/aba4a196d0697b3887ba4617d129e215.jpg" alt="Imagen 1" class="carousel-item active">
+            <img src="imagenes/fab5b4a1c133b273e3c97f8d71634ead.jpg" alt="Imagen 2" class="carousel-item">
+            <img src="imagenes/9a3decb952c091ee0c409cefbb77cc46.jpg" alt="Imagen 3" class="carousel-item">
+        </div>
+        <button class="carousel-button prev">&#10094;</button>
+        <button class="carousel-button next">&#10095;</button>
+    </div>
+    <section id="sale" style="padding: 40px 20px; text-align: center;">
+        <h2>Gran liquidación</h2>
+        <p>Descubre nuestras ofertas exclusivas y renueva tu hogar.</p>
+    </section>
+
+    <section class="bento-grid">
+        <img src="imagenes/e1e4022b07fd9dc13689c9fda872a3b9.jpg" alt="Imagen 1">
+        <img src="imagenes/7fede24ee8742114fb6027179ed9f388.jpg" alt="Imagen 2">
+        <img src="imagenes/5a75712f0de97b25a78a003ecc11a233.jpg" alt="Imagen 3">
+        <div class="ver-mas">
+            <button class="ver-mas-button"><a href="catalogo.html">Ver más</a></button>
+        </div>
+    </section>
+   
+
+    <section class="newsletter" id="newsletter">
+        <h3>Recibe noticias y contenido exclusivo</h3>
+        <input type="email" placeholder="Tu correo electrónico">
+        <button>Suscribirse</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Rizuy. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const carouselInner = document.querySelector('.carousel-inner');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const prevButton = document.querySelector('.carousel-button.prev');
+        const nextButton = document.querySelector('.carousel-button.next');
+    
+        let currentIndex = 0;
+        let interval;
+    
+        // Función para mostrar la imagen actual
+        function showImage(index) {
+            carouselItems.forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+    
+        // Función para avanzar al siguiente slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            showImage(currentIndex);
+        }
+    
+        // Función para retroceder al slide anterior
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            showImage(currentIndex);
+        }
+    
+        // Iniciar el movimiento automático
+        function startAutoSlide() {
+            interval = setInterval(nextSlide, 3000); // Cambia de imagen cada 5 segundos
+        }
+    
+        // Detener el movimiento automático
+        function stopAutoSlide() {
+            clearInterval(interval);
+        }
+    
+        // Event listeners para los botones
+        nextButton.addEventListener('click', () => {
+            nextSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    
+        prevButton.addEventListener('click', () => {
+            prevSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+    
+        // Iniciar el carrusel automático al cargar la página
+        startAutoSlide();
+    
+        // Pausar el carrusel cuando el usuario pasa el mouse sobre él
+        carouselInner.addEventListener('mouseenter', stopAutoSlide);
+        carouselInner.addEventListener('mouseleave', startAutoSlide);
+    </script>
+</body>
+</html>
